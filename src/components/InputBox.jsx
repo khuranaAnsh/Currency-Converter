@@ -5,8 +5,8 @@ function InputBox({
   amount,
   onAmountChange,
   onCurrencyChange,
-  currencyOptions = [],
-  selectCurrency = "usd",
+  currencyOptions = [], //I have taken by default array so that app don't crash.
+  selectCurrency = "usd", //by default usd
   amountDisable = false,
   currencyDisable = false,
   className = "",
@@ -17,6 +17,7 @@ function InputBox({
   // ! Always remember do not call useId to generate keys in a list. Keys should be generated from your data.
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
+      {/* yha pr mai user se bhi custom css(classname) le rha hu upar vali statement me isliye backticks me CSS ko dala hai */}
       <div className="w-1/2">
         <label
           htmlFor={amountInputId}
@@ -35,6 +36,7 @@ function InputBox({
             (e) => onAmountChange && onAmountChange(Number(e.target.value)) //here if someone does not pass onAmountChange then there are possible chances that it crash
             //(because we have not passed any default value while declartion of onAmounChange as its a function) if we directly use onAmountChange function here so to check whether this exists or not.
             // That's why we arre first checking it (onAmountChange) and then we are calling it   onAmountChange(Number(e.target.value))
+            // !JS each time takes event values as strings that's why we have wrapped it in numbers
           }
         />
       </div>
@@ -48,6 +50,7 @@ function InputBox({
         >
           {/*Now we are going in a loop to find currency and to increase performace of loop use key */}
           {/* Remember the key in loops in React */}
+          {/* Whenever we apply loop in JSX, we have to pass key to repeat elements which increase performace*/}
           {currencyOptions.map((currency) => (
             <option key={currency} value={currency}>
               {currency}
